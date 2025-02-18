@@ -4,6 +4,7 @@ class ModelAccount extends AbstractModel{
     private int $id;
     private array $account;
     private string $email;
+    
 
 /**
  * @method ajouter un compte en BDD
@@ -16,10 +17,10 @@ function add(): void {
         $requete = "INSERT INTO account(firstname, lastname, email, `password`)
         VALUE(?,?,?,?)";
         $req = $bdd->prepare($requete);
-        $req->bindParam(1,$account[0], PDO::PARAM_STR);
-        $req->bindParam(2,$account[1], PDO::PARAM_STR);
-        $req->bindParam(3,$account[2], PDO::PARAM_STR);
-        $req->bindParam(4,$account[3], PDO::PARAM_STR);
+        $req->bindParam(1,$this->account[0], PDO::PARAM_STR);
+        $req->bindParam(2,$this->account[1], PDO::PARAM_STR);
+        $req->bindParam(3,$this->account[2], PDO::PARAM_STR);
+        $req->bindParam(4,$this->account[3], PDO::PARAM_STR);
         $req->execute();
     }
     catch(Exception $e) {
@@ -38,10 +39,10 @@ function update(): void {
         $requete = "UPDATE account SET firstname=?, lastname=?, email=? 
         WHERE email=?";
         $req = $bdd->prepare($requete);
-        $req->bindParam(1,$account[0], PDO::PARAM_STR);
-        $req->bindParam(2,$account[1], PDO::PARAM_STR);
-        $req->bindParam(3,$account[3], PDO::PARAM_STR);
-        $req->bindParam(4,$account[2], PDO::PARAM_STR);
+        $req->bindParam(1,$this->account[0], PDO::PARAM_STR);
+        $req->bindParam(2,$this->account[1], PDO::PARAM_STR);
+        $req->bindParam(3,$this->account[3], PDO::PARAM_STR);
+        $req->bindParam(4,$this->account[2], PDO::PARAM_STR);
         $req->execute();
     } catch (Exception $e) {
         echo "Erreur : " . $e->getMessage();
@@ -58,7 +59,7 @@ function delete(): void {
     try{
         $requete = "DELETE FROM account WHERE email=?";
         $req = $bdd->prepare($requete);
-        $req->bindParam(1,$email, PDO::PARAM_STR);
+        $req->bindParam(1,$this->email, PDO::PARAM_STR);
         $req->execute();
     } catch(Exception $e) {
         echo "Erreur : " . $e->getMessage();

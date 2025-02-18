@@ -12,6 +12,12 @@ abstract class AbstractController{
         * @param InterfaceView[] 
     */
     private array $listView;
+
+    public function __construct(array $listModel, array $listView) {
+        $this->listModel = $listModel;
+        $this->listView = $listView;
+
+    }
     abstract public function render():void;
     function getListModel():array{
         return $this->listModel;

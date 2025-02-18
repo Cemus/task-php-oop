@@ -3,6 +3,8 @@
 
 class ViewHeader implements InterfaceView{
     private string $nav;
+
+    
     public function displayView():string{
         ob_start();
         ?>
@@ -14,7 +16,10 @@ class ViewHeader implements InterfaceView{
         </head>
         <body>
         <header>
-            <h1>Accueil</h1>
+        <nav>
+            <a href="/">Accueil</a>
+            <?php echo $this->getNav() ?>
+        </nav>
         </header>
         <?php
         return ob_get_clean();

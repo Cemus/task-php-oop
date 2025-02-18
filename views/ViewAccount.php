@@ -1,35 +1,30 @@
 <?php
 
-class ViewAccount implements InterfaceView{
-    private string $form;
+class ViewAccount implements interfaceView{
+    //ATTRIBUT
+    private ?string $form = '';
+    private ?string $listUsers = '';
+
+    //GETTER ET SETTER
+    public function getForm(): ?string { return $this->form; }
+    public function setForm(?string $form): self { $this->form = $form; return $this; }
+
+    public function getListUsers(): ?string { return $this->listUsers; }
+    public function setListUsers(?string $listUsers): self { $this->listUsers = $listUsers; return $this; }
+
+
+    //METHOD
     public function displayView():string{
         ob_start();
+        echo $this->getForm();
         ?>
-        <section>
-            <h1>Inscription</h1>
-            <form action="" method="post">
-                <input type="text" name="lastname" placeholder="Le Nom de Famille">
-                <input type="text" name="firstname" placeholder="Le Prénom">
-                <input type="text" name="email" placeholder="L'Email'">
-                <input type="password" name="password" placeholder="Le Mot de Passe">
-                <input type="submit" name="submitSignUp">
-            </form>
-            <p><?php echo $message ?></p>
-        </section>
         <section>
             <h1>Liste d'Utilisateurs</h1>
             <ul>
-                <?php echo $listUsers ?>
+                <?php echo $this->listUsers ?>
             </ul>
         </section>
-        <?php
-        return ob_get_clean();
-    }
-    public function getForm():string{
-        return $this->form;
-    }
-    public function setForm(string $newForm):self{
-        $this->form = $newForm;
-        return $this;
+        <?
+        return ob_clean();
     }
 }
