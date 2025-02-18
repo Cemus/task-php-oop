@@ -1,35 +1,42 @@
 <?php
 
-include "./views/InterfaceView.php";
-include "./models/AbstractModel.php";
+
 
 abstract class AbstractController{
     /** 
         * @param AbstractModel[] 
     */
-    private array $listModel;
+    private ?array $listModels;
     /** 
         * @param InterfaceView[] 
     */
-    private array $listView;
+    private ?array $listViews;
 
-    public function __construct(array $listModel, array $listView) {
-        $this->listModel = $listModel;
-        $this->listView = $listView;
-
-    }
-    abstract public function render():void;
-    function getListModel():array{
-        return $this->listModel;
-    }
-    function setListModel(array $newListModel):self{
-        $this->listModel = $newListModel;
-        return $this;
-    }
-    function renderHeader():void{
+    public function __construct(?array $listModels, ?array $listViews) {
+        $this->listModels = $listModels;
+        $this->listViews = $listViews;
 
     }
-    function renderFooter():void{
-        
+    //GETTER ET SETTER
+    public function getListModels(): ?array { return $this->listModels; }
+    public function setListModels(?array $listModels): self { $this->listModels = $listModels; return $this; }
+
+    public function getListViews(): ?array { return $this->listViews; }
+    public function setListViews(?array $listViews): self { $this->listViews = $listViews; return $this; }
+
+    //METHOD
+    public abstract function render():void;
+
+    public function renderHeader():void{
+        if(isset($_SESSION['id'])){
+            $this->getListViews()['header']->setNav('<a href="/moncompte">Mon Compte</a>
+                 <a href="/deconnexion">Se Déconnecter</a>');
+         }
+        echo $this->getListViews()['header']->displayView();
+    }
+
+    public function renderFooter():void{
+        $footer = $this->getListViews();
+        echo $footer['footer']->displayView();
     }
 }

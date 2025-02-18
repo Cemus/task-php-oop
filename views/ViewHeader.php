@@ -5,8 +5,13 @@ class ViewHeader implements InterfaceView{
     private string $nav;
 
     
+    public function __construct(?string $nav = "") {
+        $this->nav = $nav;
+    }
+
     public function displayView():string{
         ob_start();
+
         ?>
         <html lang="fr">
         <head>
@@ -22,6 +27,7 @@ class ViewHeader implements InterfaceView{
         </nav>
         </header>
         <?php
+        
         return ob_get_clean();
     }
     public function getNav():string{

@@ -1,10 +1,9 @@
 <?php
 
-include("./InterfaceView.php");
-
 class ViewFooter implements InterfaceView{
     public function displayView():string{
         ob_start();
+        
         ?>
             <footer>
                 <p>Mentions Légales</p>
@@ -13,6 +12,7 @@ class ViewFooter implements InterfaceView{
         </body>
         </html>
         <?php
+
         return ob_get_clean();
     }
 

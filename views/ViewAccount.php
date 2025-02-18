@@ -6,17 +6,26 @@ class ViewAccount implements interfaceView{
     private ?string $listUsers = '';
 
     //GETTER ET SETTER
-    public function getForm(): ?string { return $this->form; }
-    public function setForm(?string $form): self { $this->form = $form; return $this; }
+    public function getForm():?string {
+         return $this->form; 
+    }
+    public function setForm(?string $form):self { 
+        $this->form = $form; return $this; 
+    }
 
-    public function getListUsers(): ?string { return $this->listUsers; }
-    public function setListUsers(?string $listUsers): self { $this->listUsers = $listUsers; return $this; }
+    public function getListUsers():?string { 
+        return $this->listUsers; 
+    }
+    public function setListUsers(?string $listUsers):self { 
+        $this->listUsers = $listUsers; 
+        return $this; 
+    }
 
-
-    //METHOD
     public function displayView():string{
         ob_start();
+        
         echo $this->getForm();
+
         ?>
         <section>
             <h1>Liste d'Utilisateurs</h1>
@@ -24,7 +33,8 @@ class ViewAccount implements interfaceView{
                 <?php echo $this->listUsers ?>
             </ul>
         </section>
-        <?
+        <?php
+
         return ob_clean();
     }
 }
