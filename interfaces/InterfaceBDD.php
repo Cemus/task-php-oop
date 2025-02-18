@@ -1,5 +1,5 @@
 <?php
 
 interface InterfaceBDD{
-    public function connexion():object;
+    public function connexion():PDO;
 }

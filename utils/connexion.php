@@ -6,8 +6,7 @@
 
 
 class Connexion implements InterfaceBDD{
-    function connexion(): PDO
-    {
+    function connexion(): PDO{
         return new PDO(
             'mysql:host=' . $_ENV["URL_BDD"] . ';dbname=' . $_ENV["NAME_BDD"],
             $_ENV["LOGIN_BDD"],
