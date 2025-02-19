@@ -1,9 +1,9 @@
 <?php
 
 abstract class AbstractModel{
-    private InterfaceBDD $bdd;
+    private PDO $bdd;
 
-    public function __construct(InterfaceBDD $bdd) {
+    public function __construct(PDO $bdd) {
         $this->bdd = $bdd;
     }
     abstract public function add():void;
@@ -17,20 +17,20 @@ abstract class AbstractModel{
     /**
      * Get the value of bdd
      *
-     * @return InterfaceBDD
+     * @return PDO
      */
-    public function getBdd(): InterfaceBDD {
+    public function getBdd(): PDO {
         return $this->bdd;
     }
 
     /**
      * Set the value of bdd
      *
-     * @param InterfaceBDD $bdd
+     * @param PDO $bdd
      *
      * @return self
      */
-    public function setBdd(InterfaceBDD $bdd): self {
+    public function setBdd(PDO $bdd): self {
         $this->bdd = $bdd;
         return $this;
     }

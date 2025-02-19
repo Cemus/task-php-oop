@@ -20,12 +20,12 @@ class ViewHeader implements InterfaceView{
             <title>Ajouter une categorie</title>
         </head>
         <body>
-        <header>
-        <nav>
-            <a href="/">Accueil</a>
-            <?php echo $this->getNav() ?>
-        </nav>
-        </header>
+            <header>
+                <nav>
+                    <a href="/">Accueil</a>
+                    <?php echo $this->getNav() ?>
+                </nav>
+            </header>
         <?php
         
         return ob_get_clean();

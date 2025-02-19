@@ -16,7 +16,7 @@ function add(): void {
     try{
         $requete = "INSERT INTO account(firstname, lastname, email, `password`)
         VALUE(?,?,?,?)";
-        $bdd =$this->getBdd()->connexion();
+        $bdd =$this->getBdd();
         $req = $bdd->prepare($requete);
         $req->bindParam(1,$this->account[0], PDO::PARAM_STR);
         $req->bindParam(2,$this->account[1], PDO::PARAM_STR);
@@ -39,7 +39,7 @@ function update(): void {
     try {
         $requete = "UPDATE account SET firstname=?, lastname=?, email=? 
         WHERE email=?";
-        $bdd =$this->getBdd()->connexion();
+        $bdd =$this->getBdd();
         $req = $bdd->prepare($requete);
         $req->bindParam(1,$this->account[0], PDO::PARAM_STR);
         $req->bindParam(2,$this->account[1], PDO::PARAM_STR);
@@ -59,7 +59,7 @@ function update(): void {
  */
 function delete(): void {
     try{
-        $bdd =$this->getBdd()->connexion();
+        $bdd =$this->getBdd();
         $requete = "DELETE FROM account WHERE email=?";
         $req = $bdd->prepare($requete);
         $req->bindParam(1,$this->email, PDO::PARAM_STR);
@@ -76,9 +76,9 @@ function delete(): void {
  */
 function getById(): array|null {
     try {
+        $bdd =$this->getBdd();
         $requete = "SELECT id_account, firstname, lastname, email FROM account
         WHERE id = ?";
-        $bdd =$this->getBdd()->connexion();
         $id = $this->getId();
         $req = $bdd->prepare($requete);
         $req->bindParam(1,$id, PDO::PARAM_STR);
@@ -91,6 +91,21 @@ function getById(): array|null {
     }
 }
 
+function getByEmail($email): array|null {
+    try {
+        $bdd =$this->getBdd();
+        $requete = "SELECT id_account, firstname, lastname, email, `password` FROM account
+        WHERE email = ?";
+        $req = $bdd->prepare($requete);
+        $req->bindParam(1,$email, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
+        return null;
+    }
+}
 /**
  * @method afficher tous les comptes
  * @param PDO $bdd
@@ -98,7 +113,7 @@ function getById(): array|null {
  */
 function getAll(): array|null{
     try {
-        $bdd =$this->getBdd()->connexion();
+        $bdd =$this->getBdd();
         $requete = "SELECT id_account, firstname, lastname, email FROM account";
         $req = $bdd->prepare($requete);
         $req->execute();

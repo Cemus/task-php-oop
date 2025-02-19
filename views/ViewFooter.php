@@ -8,7 +8,6 @@ class ViewFooter implements InterfaceView{
             <footer>
                 <p>Mentions Légales</p>
             </footer>
-
         </body>
         </html>
         <?php
